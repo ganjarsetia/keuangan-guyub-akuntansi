@@ -7,6 +7,8 @@
 	<meta name="description" content=""/>
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
+	
+	<base href="<?= $this->config->item('base_url') ?>" />
 
 	<style type="text/css" title="currentStyle">
 			@import "<?php echo base_url();?>css/style.css";
@@ -27,6 +29,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>js/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>js/additional-methods.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>js/jquery-ui-1.8rc3.custom.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>js/swfobject.js"></script>
 		<script type="text/javascript">
 		$(function() {
 			$("#datepicker").datepicker({
@@ -124,7 +127,7 @@
 			</div>
 			<div class="left navigation" id="main-nav">
 
-				<p><a href="http://code.google.com/p/keuangan-guyub/">Aplikasi F/OSS untuk Keuangan UKM Jasa</a></p>
+				<p><a href="http://code.google.com/p/keuangan-guyub/">Aplikasi Keuangan Open Source untuk UKM Jasa</a></p>
 
 			</div>
 			<div class="clearer">&nbsp;</div>
@@ -132,7 +135,7 @@
 
 		<div class="navigation" id="sub-nav">
 			<ul class="user-logout">
-				<li class="current-tab"><a href="#">Hi.. <?php echo $this->session->userdata('SESS_FIRST_NAME'); ?> ;) </a></li>
+				<li class="current-tab"><a href="<?php echo current_url(); ?>#">Hi.. <?php echo $this->session->userdata('SESS_FIRST_NAME'); ?> ;) </a></li>
 				<li><?php echo anchor('login/logout', 'Logout'); ?>  |</li>
 				<li><?php echo anchor('user/edit/'.$this->session->userdata('SESS_USER_ID'), 'Ubah Profil'); ?>  |</li>
 			</ul>

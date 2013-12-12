@@ -59,7 +59,10 @@ class Jurnal extends Controller {
 		$data['title'] = "Jurnal Umum";
 		$data['main_content'] = 'jurnal/form';
 		$data['f_id'] = 1;
-		$data['accounts'] = $this->akun_model->get_data_for_dropdown();
+		// edited by Adhe on 19.05.2010
+		$accounts = $this->akun_model->get_data_for_dropdown();
+		$data['accounts'] = ($accounts) ? $accounts : array('-- Belum ada Akun --');
+		// end
 		$this->load->view('layout/template', $data);
 	}
 
@@ -68,7 +71,10 @@ class Jurnal extends Controller {
 		$data['title'] = "Jurnal Penyesuaian";
 		$data['main_content'] = 'jurnal/form';
 		$data['f_id'] = 2;
-		$data['accounts'] = $this->akun_model->get_data_for_dropdown();
+		// edited by Adhe on 19.05.2010
+		$accounts = $this->akun_model->get_data_for_dropdown();
+		$data['accounts'] = ($accounts) ? $accounts : array('-- Belum ada Akun --');
+		// end
 		$this->load->view('layout/template', $data);
 	}
 
@@ -260,8 +266,8 @@ class Jurnal extends Controller {
 
 	function _search_jurnal()
 	{
-		$month = ($this->input->post('bulan')) ? $this->input->post('bulan') : date("m");
-		$year = ($this->input->post('tahun')) ? $this->input->post('tahun') : date("Y");
+		$month = ($this->input->post('bulan') !== FALSE) ? $this->input->post('bulan') : date("m");
+		$year = ($this->input->post('tahun') !== FALSE) ? $this->input->post('tahun') : date("Y");
 		$this->jurnal_model->set_month_year($month, $year);
 		return $this->jurnal_model->get_data();
 	}
@@ -275,8 +281,8 @@ class Jurnal extends Controller {
 		$akun = $this->input->post('akun');
 		for ($i = 1; $i <= count($akun); $i++)
 		{
-			$this->form_validation->set_rules('debit'.$i, 'Debit', 'trim|integer');
-			$this->form_validation->set_rules('kredit'.$i, 'Kredit', 'trim|integer');
+			$this->form_validation->set_rules('debit'.$i, 'Debit', 'trim|is_natural');
+			$this->form_validation->set_rules('kredit'.$i, 'Kredit', 'trim|is_natural');
 		}
 
 		return $this->form_validation->run();
